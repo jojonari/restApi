@@ -1,5 +1,6 @@
 package com.rest.api.advice;
 
+import com.rest.api.advice.exception.CEmailSigninFailedException;
 import com.rest.api.advice.exception.CUserNotFoundException;
 import com.rest.api.model.response.CommonResult;
 import com.rest.api.service.ResponseService;
@@ -19,6 +20,7 @@ public class ExceptionAdvice {
     private final ResponseService responseService;
     private final MessageSource messageSource;
 
+    //todo: 미연이에게 투두 설명하기
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResult defaultException(HttpServletRequest request, Exception e) {
@@ -38,5 +40,11 @@ public class ExceptionAdvice {
     // code정보, 추가 argument로 현재 locale에 맞는 메시지를 조회합니다.
     private String getMessage(String code, Object[] args) {
         return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
+    }
+
+    @ExceptionHandler(CEmailSigninFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult emailSigninFailed(HttpServletRequest request, CEmailSigninFailedException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("emailSigninFailed.code")), getMessage("emailSigninFailed.msg"));
     }
 }
