@@ -22,7 +22,7 @@ import java.util.Collections;
 @Api(tags = {"1. Sign"})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "v1")
+@RequestMapping(value = "/v1")
 public class SignController {
     private final UserJpaRepo userJpaRepo;
     private final JwtTokenProvider jwtTokenProvider;
@@ -41,7 +41,7 @@ public class SignController {
 
     @ApiOperation(value = "가입", notes = "회원가입을 한다.")
     @GetMapping(value = "/signup")
-    public CommonResult signin(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id, @ApiParam(value = "비밀번호", required = true) @RequestParam String password, @ApiParam(value = "이름", required = true) @RequestParam String name) {
+    public CommonResult signup(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id, @ApiParam(value = "비밀번호", required = true) @RequestParam String password, @ApiParam(value = "이름", required = true) @RequestParam String name) {
         userJpaRepo.save(User.builder()
                 .uid(id)
                 .password(passwordEncoder.encode(password))
