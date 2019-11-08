@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 
 //TESTmaster
 //test
+//TEST
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserJpaRepoTest {
