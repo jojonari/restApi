@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
-//A브랜치의 주석
+//B브랜치의 주석
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserJpaRepoTest {
